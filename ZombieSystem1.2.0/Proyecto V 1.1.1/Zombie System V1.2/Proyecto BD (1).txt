@@ -1,0 +1,101 @@
+
+create database agenciaseguro;
+
+use agenciaseguro;
+
+create table cliente(
+
+id_Cliente int(20) primary key,
+Nombre varchar(15),
+Apell_P varchar(15),
+Apell_M varchar(15),
+Estado varchar(20),
+Municipio varchar(30),
+Colonia varchar(20),
+Calle varchar(20),
+NumExt varchar(5),
+NumInt varchar(5),
+CP varchar(6),
+Telefono varchar(15),
+Correo varchar(30),
+RFC varchar(15)
+) engine InnoDB;
+
+create table agente(
+
+id_agente int(20) primary key,
+Nombre varchar(25),
+Apell_P varchar(15),
+Apell_M varchar(15),
+Telefono varchar(15),
+Correo varchar(30)
+) engine InnoDB;
+
+create table companias(
+
+id_companias int (20) primary key,
+Nombre varchar(10),
+Telefono varchar(15),
+Correo varchar(15),
+TipoSeguro varchar(10),
+Covertura varchar(10),
+Precio float(10)
+)engine InnoDB;
+
+create table catalogo(
+id_catalogo int(10) primary key,
+id_companias int(20),
+Precioanio float(15),
+Coberura varchar(15),
+Tiposeguro varchar(15),
+foreign key(id_companias) references companias(id_companias) on update cascade
+) engine InnoDB;
+
+
+
+create table poliza(
+
+id_Poliza int(10) primary key,
+id_agente int(10),
+id_Companias int(10),
+id_Cliente int(10),
+NomCliente varchar(20),
+Apell_p varchar(15),
+Apell_m varchar(15),
+Calle varchar(30),
+NumExt varchar(6),
+NumInt varchar(6),
+Municipio varchar(20),
+Estado varchar(20),
+Colonia varchar(20),
+Telefono varchar(15),
+CP varchar(6),
+RFC varchar(20),
+Nomcompani varchar(20),
+NomAgente varchar(15),
+Clavevehiculo varchar(15),
+Marca varchar(10),
+Tipo varchar(10),
+Modelo varchar(6),
+Serie varchar(10),
+Placas varchar(10),
+foreign key(id_agente) references agente(id_agente) on update cascade,
+foreign key(id_companias) references companias(id_companias) on update cascade,
+foreign key(id_cliente) references cliente(id_cliente) on update cascade
+) engine InnoDB;
+
+create table registrodocuementos(
+id_documentos int(10) primary key not null,
+id_cliente int(10),
+id_poliza int(10),
+Tipseg varchar(20),
+Inivigen varchar(20),
+Finvigen varchar(20),
+Pritotal varchar(20),
+Renovacion varchar(20),
+foreign key(id_cliente) references cliente(id_cliente) on update cascade,
+foreign key(id_poliza) references poliza(id_poliza) on update cascade
+)engine InnoDB;
+
+
+
